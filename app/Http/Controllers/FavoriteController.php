@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FavoriteCollection;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,11 @@ class FavoriteController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return FavoriteCollection
      */
     public function index()
     {
-        //
+        return new FavoriteCollection(Favorite::all());
     }
 
     /**
@@ -33,9 +34,10 @@ class FavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Favorite $favorite)
     {
-        //
+
+        return $favorite->create($request->all());
     }
 
     /**
@@ -46,7 +48,7 @@ class FavoriteController extends Controller
      */
     public function show(Favorite $favorite)
     {
-        //
+        return $favorite;
     }
 
     /**

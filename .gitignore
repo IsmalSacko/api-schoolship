@@ -16,3 +16,11 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/forsat/.dart_tool
+/forsat/.flutter-plugins
+/forsat/.flutter-plugins-dependencies
+/forsat/.packages
+/forsat/.pub-cache
+/forsat/.pub
+/forsat/build
+

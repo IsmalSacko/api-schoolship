@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ForumStore;
+use App\Http\Resources\ForumCollection;
 use App\Models\Forum;
+use App\Models\Lookups\Category;
 use Illuminate\Http\Request;
 
 class ForumController extends Controller
@@ -14,7 +17,7 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        return new ForumCollection(Forum::all());
     }
 
     /**
@@ -31,22 +34,24 @@ class ForumController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return ForumStore|Request
      */
-    public function store(Request $request)
+    public function store(ForumStore $request)
+
     {
-        //
+
+        return Forum::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Forum  $forum
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Forum  $question
+     * @return Forum
      */
-    public function show(Forum $forum)
+    public function show(Forum $question)
     {
-        //
+        return $question;
     }
 
     /**
@@ -67,9 +72,10 @@ class ForumController extends Controller
      * @param  \App\Models\Forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Forum $forum)
+    public function update(ForumStore $request, Forum $question)
     {
-        //
+        $question->update($request->all());
+        return $question;
     }
 
     /**
@@ -78,8 +84,8 @@ class ForumController extends Controller
      * @param  \App\Models\Forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Forum $forum)
+    public function destroy(Forum $question)
     {
-        //
+        return $question->delete();
     }
 }

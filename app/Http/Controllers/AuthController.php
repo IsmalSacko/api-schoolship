@@ -33,7 +33,7 @@ class AuthController extends Controller
         return $this->getResponse($user);
     }
 
-    //login
+//login
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
@@ -47,7 +47,9 @@ class AuthController extends Controller
             $user = $request->user();
             return $this->getResponse($user);
         }
+
     }
+
     // user
     public function user(Request $request){
         return $request->user();
@@ -55,11 +57,11 @@ class AuthController extends Controller
 
     //get response
     private function getResponse(User $user){
-        $token = $user->createToken('Personal_Access_Token')->plainTextToken;
+        $token = $user->createToken('Personal_Access_Token');
         return response([
                 'user' => $user->first_name.' '.$user->last_name,
                 'email' => $user->email,
-                'token' => $token,
+                'token' => $token->plainTextToken,
                 'expires_at' => Carbon::parse($user->tokens()->first()->expires_at)->toDateTimeString()
             ],200);
     }

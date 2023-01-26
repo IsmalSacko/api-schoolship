@@ -28,7 +28,8 @@ class CountryController extends Controller
      */
     public function create(CountryStore $request)
     {
-        return $request;
+
+        return Country::created($request->all());
     }
 
     /**
@@ -38,8 +39,10 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CountryStore $request)
+
     {
-        return $request;
+        return Country::create($request->all());
+       // return $request;
     }
 
     /**
